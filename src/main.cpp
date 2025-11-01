@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "ps5Controller.h"
+#include "ESP32_Servo.h"
 
 void setup() {
   Serial.begin(115200);

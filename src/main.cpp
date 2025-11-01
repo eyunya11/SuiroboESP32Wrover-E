@@ -11,6 +11,7 @@ void loop() {
   if(ps5.isConnected())
   {
     Serial.printf("left:%d right:%d\n",ps5.LStickY(),ps5.RStickY());
+    //PropellerPower(ps5.LStickY(), ps5.RStickY());
     delay(100);
   }
 }
@@ -32,7 +33,7 @@ void PropellerPower(int left, int right)
     ledcWrite(0, 0);
     ledcWrite(1, 0);
   }
-  
+
   if (right > 20)
   {
     ledcWrite(2, right);

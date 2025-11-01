@@ -14,3 +14,38 @@ void loop() {
     delay(100);
   }
 }
+
+void PropellerPower(int left, int right)
+{
+  if (left > 20)
+  {
+    ledcWrite(0, left);
+    ledcWrite(1, 0);
+  }
+  else if (left < -20)
+  {
+    ledcWrite(0, 0);
+    ledcWrite(1, abs(left));
+  }
+  else
+  {
+    ledcWrite(0, 0);
+    ledcWrite(1, 0);
+  }
+  
+  if (right > 20)
+  {
+    ledcWrite(2, right);
+    ledcWrite(3, 0);
+  }
+  else if (right < -20)
+  {
+    ledcWrite(2, 0);
+    ledcWrite(3, abs(right));
+  }
+  else
+  {
+    ledcWrite(2, 0);
+    ledcWrite(3, 0);
+  }
+}

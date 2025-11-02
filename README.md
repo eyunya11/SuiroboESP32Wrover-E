@@ -9,7 +9,7 @@
 
 2.ZIPを所定のPlatformIOのプロジェクトフォルダに解凍する
 
-3.PlatformIOのOpen→OpenProjectを押して解凍したフォルダを選択する
+3.PlatformIOのHome→OpenProjectを押して解凍したフォルダを選択する
 
 すごく簡単！
 

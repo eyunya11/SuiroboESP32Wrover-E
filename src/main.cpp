@@ -51,3 +51,38 @@ void PropellerPower(int left, int right)
     ledcWrite(3, 0);
   }
 }
+
+void ServoPower(int left, int right)
+{
+  if (left > 20)
+  {
+    ledcWrite(4, left);
+    ledcWrite(5, 0);
+  }
+  else if (left < -20)
+  {
+    ledcWrite(4, 0);
+    ledcWrite(5, abs(left));
+  }
+  else
+  {
+    ledcWrite(4, 0);
+    ledcWrite(5, 0);
+  }
+
+  if (right > 20)
+  {
+    ledcWrite(6, right);
+    ledcWrite(7, 0);
+  }
+  else if (right < -20)
+  {
+    ledcWrite(6, 0);
+    ledcWrite(7, abs(right));
+  }
+  else
+  {
+    ledcWrite(6, 0);
+    ledcWrite(7, 0);
+  }
+}

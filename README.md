@@ -6,10 +6,15 @@
 ## 実行方法
 
 1.まずZIPをダウンロードする
+
 2.ZIPを所定のPlatformIOのプロジェクトフォルダに解凍する
+
 3.PlatformIOのOpen→OpenProjectを押して解凍したフォルダを選択する
+
 すごく簡単！
+
 あとは何も変更を加えずESP32に書き込むだけ、
+
 ただし使えるかテストしているESPはESP32Wrover-Eだけです。ほかのESPで動く保証はありません。
 
 [PS5コントローラーのライブラリ](https://github.com/rodneybakiskan/ps5-esp32.git)

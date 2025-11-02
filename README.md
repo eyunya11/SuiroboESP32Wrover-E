@@ -3,14 +3,14 @@
 
 実行するにはPlatformIOの実行環境が必要です。
 
-ESP32はファイル/基本設定から設定画面を開き追加のボードマネージャのURLに
+## 実行方法
 
+1.まずZIPをダウンロードする
+2.ZIPを所定のPlatformIOのプロジェクトフォルダに解凍する
+3.PlatformIOのOpen→OpenProjectを押して解凍したフォルダを選択する
+すごく簡単！
+あとは何も変更を加えずESP32に書き込むだけ、
+ただし使えるかテストしているESPはESP32Wrover-Eだけです。ほかのESPで動く保証はありません。
 
-
-[PS5コントローラーのライブラリ](https://github.com/BLACKROBOTICS/ps5Controller)
-
-ArduinoIDEにはライブラリがないのでGithubから引っ張ってくる必要があります。
-
-[解説記事](https://note.com/kagyroy/n/ne3d1fd231143)を参考にして導入してください。
-
-
+[PS5コントローラーのライブラリ](https://github.com/rodneybakiskan/ps5-esp32.git)
+[ESP32Serboのライブラリ](https://github.com/jkb-git/ESP32Servo.git)

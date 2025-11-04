@@ -2,10 +2,22 @@
 #include "ps5Controller.h"
 #include "ESP32_Servo.h"
 
+Servo myservo;
+
+int servopin[1] = {18};
+
 void setup() {
   Serial.begin(115200);
   ps5.begin("A0:FA:9C:2B:D4:DD");
   Serial.println("Ready.");
+  for(int i = 0; i < sizeof(servopin) / sizeof(int); i++)
+  {
+    if(myservo.attach(servopin[i]) == 0)
+    {
+      Serial.printf("pin:%d サーボの接続失敗\n", servopin[i]);
+    }
+  }
+
 }
 
 void loop() {
@@ -56,8 +68,7 @@ void ServoPower(int left, int right)
 {
   if (left > 20)
   {
-    ledcWrite(4, left);
-    ledcWrite(5, 0);
+    myservo.write(left);
   }
   else if (left < -20)
   {

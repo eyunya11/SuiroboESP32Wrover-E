@@ -17,7 +17,6 @@ void setup() {
       Serial.printf("pin:%d サーボの接続失敗\n", servopin[i]);
     }
   }
-
 }
 
 void loop() {
@@ -64,36 +63,14 @@ void PropellerPower(int left, int right)
   }
 }
 
-void ServoPower(int left, int right)
+void ServoPower(int degree)
 {
-  if (left > 20)
+  if (degree >= 0 && degree <= 180)
   {
-    myservo.write(left);
-  }
-  else if (left < -20)
-  {
-    ledcWrite(4, 0);
-    ledcWrite(5, abs(left));
+    myservo.write(degree);
   }
   else
   {
-    ledcWrite(4, 0);
-    ledcWrite(5, 0);
-  }
-
-  if (right > 20)
-  {
-    ledcWrite(6, right);
-    ledcWrite(7, 0);
-  }
-  else if (right < -20)
-  {
-    ledcWrite(6, 0);
-    ledcWrite(7, abs(right));
-  }
-  else
-  {
-    ledcWrite(6, 0);
-    ledcWrite(7, 0);
+    Serial.printf("サーボ角度指定エラー:%d\n", degree);
   }
 }

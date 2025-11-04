@@ -1,18 +1,24 @@
-#include <Arduino.h>
+#include "Arduino.h"
 #include "ps5Controller.h"
 #include "ESP32_Servo.h"
 
-Servo myservo;
+Servo myservo[2];
 
-int servopin[1] = {18};
+int servopin[2] = {27, 14};
+int propellerPin[4] = {17, 16, 22, 0};
 
 void setup() {
   Serial.begin(115200);
   ps5.begin("A0:FA:9C:2B:D4:DD");
-  Serial.println("Ready.");
+  Serial.println("PS5 Ready.");
+  for(int i = 0; i < sizeof(propellerPin) / sizeof(int); i++)
+  {
+    ledcSetup(i, 12800, 8);
+    ledcAttachPin(propellerPin[i], i);
+  }
   for(int i = 0; i < sizeof(servopin) / sizeof(int); i++)
   {
-    if(myservo.attach(servopin[i]) == 0)
+    if(myservo[i].attach(servopin[i]) == 0)
     {
       Serial.printf("pin:%d サーボの接続失敗\n", servopin[i]);
     }
@@ -26,9 +32,14 @@ void loop() {
     //PropellerPower(ps5.LStickY(), ps5.RStickY());
     delay(100);
   }
+  else
+  {
+    Serial.printf("コントローラーが接続されていません\n");
+    delay(500);
+  }
 }
 
-void PropellerPower(int left, int right)
+void setPropellerPower(int left, int right)
 {
   if (left > 20)
   {
@@ -63,7 +74,7 @@ void PropellerPower(int left, int right)
   }
 }
 
-void ServoPower(int degree)
+void setServoAngle(int degree)
 {
   if (degree >= 0 && degree <= 180)
   {

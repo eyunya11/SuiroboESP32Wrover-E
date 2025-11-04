@@ -22,6 +22,10 @@ void setup() {
     {
       Serial.printf("pin:%d サーボの接続失敗\n", servopin[i]);
     }
+    else
+    {
+      Serial.printf("pin:%d 接続成功\n", servopin[i]);
+    }
   }
 }
 
@@ -74,11 +78,11 @@ void setPropellerPower(int left, int right)
   }
 }
 
-void setServoAngle(int degree)
+void setServoAngle(int index, int degree)
 {
   if (degree >= 0 && degree <= 180)
   {
-    myservo.write(degree);
+    myservo[index].write(degree);
   }
   else
   {

@@ -1,39 +1,25 @@
 #include "Arduino.h"
-#include "ps5Controller.h"
+#include "PS4Controller.h"
 #include "ESP32_Servo.h"
 
-Servo myservo[2];
-
-int servopin[2] = {27, 14};
-int propellerPin[4] = {17, 16, 22, 0};
+int motorPin[4] = {17, 16, 22, 0};
 
 void setup() {
   Serial.begin(115200);
-  ps5.begin("A0:FA:9C:2B:D4:DD");
-  Serial.println("PS5 Ready.");
-  for(int i = 0; i < sizeof(propellerPin) / sizeof(int); i++)
+  PS4.begin("A0:FA:9C:2B:D4:DD");
+  Serial.println("PS4 Ready.");
+  for(int i = 0; i < sizeof(motorPin) / sizeof(int); i++)
   {
     ledcSetup(i, 12800, 8);
-    ledcAttachPin(propellerPin[i], i);
-  }
-  for(int i = 0; i < sizeof(servopin) / sizeof(int); i++)
-  {
-    if(myservo[i].attach(servopin[i]) == 0)
-    {
-      Serial.printf("pin:%d サーボの接続失敗\n", servopin[i]);
-    }
-    else
-    {
-      Serial.printf("pin:%d 接続成功\n", servopin[i]);
-    }
+    ledcAttachPin(motorPin[i], i);
   }
 }
 
 void loop() {
-  if(ps5.isConnected())
+  if(PS4.isConnected())
   {
-    Serial.printf("left:%d right:%d\n",ps5.LStickY(),ps5.RStickY());
-    //PropellerPower(ps5.LStickY(), ps5.RStickY());
+    Serial.printf("left:%d right:%d\n",PS4.LStickY(),PS4.RStickY());
+    //PropellerPower(PS4.LStickY(), PS4.RStickY());
     delay(100);
   }
   else
@@ -75,17 +61,5 @@ void setPropellerPower(int left, int right)
   {
     ledcWrite(2, 0);
     ledcWrite(3, 0);
-  }
-}
-
-void setServoAngle(int index, int degree)
-{
-  if (degree >= 0 && degree <= 180)
-  {
-    myservo[index].write(degree);
-  }
-  else
-  {
-    Serial.printf("サーボ角度指定エラー:%d\n", degree);
   }
 }

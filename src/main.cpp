@@ -1,8 +1,7 @@
 #include "Arduino.h"
 #include "PS4Controller.h"
-#include "ESP32_Servo.h"
 
-int motorPin[4] = {17, 16, 22, 0};
+int motorPin[8] = {17, 16, 22, 0, 25, 26, 15, 14};
 
 void setup() {
   Serial.begin(115200);
@@ -19,7 +18,6 @@ void loop() {
   if(PS4.isConnected())
   {
     Serial.printf("left:%d right:%d\n",PS4.LStickY(),PS4.RStickY());
-    //PropellerPower(PS4.LStickY(), PS4.RStickY());
     delay(100);
   }
   else
@@ -61,5 +59,24 @@ void setPropellerPower(int left, int right)
   {
     ledcWrite(2, 0);
     ledcWrite(3, 0);
+  }
+}
+
+void setArmPower(int power)
+{
+  if (power > 20)
+  {
+    ledcWrite(4, power);
+    ledcWrite(5, 0);
+  }
+  else if (power < -20)
+  {
+    ledcWrite(4, 0);
+    ledcWrite(5, abs(power));
+  }
+  else
+  {
+    ledcWrite(4, 0);
+    ledcWrite(5, 0);
   }
 }

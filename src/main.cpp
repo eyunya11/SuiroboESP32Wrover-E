@@ -3,7 +3,8 @@
 
 int motorPin[8] = {17, 16, 22, 0, 25, 26, 15, 14};
 
-void setup() {
+void setup() 
+{
   Serial.begin(115200);
   PS4.begin("A0:FA:9C:2B:D4:DD");
   Serial.println("PS4 Ready.");
@@ -14,10 +15,12 @@ void setup() {
   }
 }
 
-void loop() {
+void loop()
+{
   if(PS4.isConnected())
   {
     Serial.printf("left:%d right:%d\n",PS4.LStickY(),PS4.RStickY());
+    setPropellerPower(PS4.LStickY(), PS4.RStickY());
     delay(100);
   }
   else

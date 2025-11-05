@@ -20,7 +20,9 @@ void loop()
   if(PS4.isConnected())
   {
     Serial.printf("left:%d right:%d\n",PS4.LStickY(),PS4.RStickY());
+    Serial.printf("arm:%d\n",PS4.R2() - PS4.L2());
     setPropellerPower(PS4.LStickY(), PS4.RStickY());
+    setArmPower(PS4.R2() - PS4.L2());
     delay(100);
   }
   else

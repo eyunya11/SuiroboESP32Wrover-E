@@ -6,29 +6,12 @@ int motorPin[8] = {17, 16, 22, 0, 25, 26, 15, 14};
 void setup() 
 {
   Serial.begin(115200);
-  PS4.begin("A0:FA:9C:2B:D4:DD");
+  PS4.begin("3C:8A:1F:91:66:86");
   Serial.println("PS4 Ready.");
   for(int i = 0; i < sizeof(motorPin) / sizeof(int); i++)
   {
     ledcSetup(i, 12800, 8);
     ledcAttachPin(motorPin[i], i);
-  }
-}
-
-void loop()
-{
-  if(PS4.isConnected())
-  {
-    Serial.printf("left:%d right:%d\n",PS4.LStickY(),PS4.RStickY());
-    Serial.printf("arm:%d\n",PS4.R2() - PS4.L2());
-    setPropellerPower(PS4.LStickY(), PS4.RStickY());
-    setArmPower(PS4.R2() - PS4.L2());
-    delay(100);
-  }
-  else
-  {
-    Serial.printf("コントローラーが接続されていません\n");
-    delay(500);
   }
 }
 
@@ -83,5 +66,22 @@ void setArmPower(int power)
   {
     ledcWrite(4, 0);
     ledcWrite(5, 0);
+  }
+}
+
+void loop()
+{
+  if(PS4.isConnected())
+  {
+    //Serial.printf("left:%d right:%d\n",PS4.LStickY(),PS4.RStickY());
+    Serial.printf("arm:%d\n",PS4.R2Value() - PS4.L2Value());
+    setPropellerPower(PS4.LStickY(), PS4.RStickY());
+    setArmPower(PS4.R2Value() - PS4.L2Value());
+    delay(100);
+  }
+  else
+  {
+    Serial.printf("コントローラーが接続されていません\n");
+    delay(500);
   }
 }
